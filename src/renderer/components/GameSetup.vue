@@ -108,6 +108,14 @@
           self.$store.state.GameServer.processStarted = self.processStarted
           self.stdout = ''
           //TODO: Download modified Get5
+          await downloadFile({
+            remoteFile: "https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git968-windows.zip",
+            localFile: "./gameserver/cs_go/csgo/mm.zip",
+            onProgress: function (received,total){
+                self.downloadPercentage = (received * 100) / total
+                console.log(self.downloadPercentage + "% | " + received + " bytes out of " + total + " bytes.")
+            }
+          })
         })
       },
       handleSuccess (e) {
